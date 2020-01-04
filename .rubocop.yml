@@ -1,0 +1,40 @@
+---
+require: rubocop-rspec
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: '2.3'
+  # Include:
+  # - "./**/*.rb"
+  Exclude:
+  - Gemfile
+  - .rubocop.yml
+  # - attic/*
+  # - vendor/**/*
+Layout/LineLength:
+  Description: People have wide screens, use them.
+  Max: 200
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+Style/FormatString:
+  Description: Prefer the % format format.
+  EnforcedStyle: percent
+Style/FormatStringToken:
+  Description: Prefer the simpler template tokens over annotated ones.
+  EnforcedStyle: template
+Style/CommandLiteral:
+  Description: use %()
+  EnforcedStyle: percent_x
+Style/RegexpLiteral:
+  Description: use %r{}
+  EnforcedStyle: percent_r
+Metrics/ClassLength:
+  Max: 125
+Metrics/MethodLength:
+  Max: 20
+Metrics/PerceivedComplexity:
+  Max: 10
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/AbcSize:
+  Max: 20
+
