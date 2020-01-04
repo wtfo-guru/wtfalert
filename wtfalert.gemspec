@@ -1,8 +1,8 @@
 # frozen_string_literal: true
-
-require_relative 'lib/wtfalert/version'
-
-dir = File.expand_path('..', __FILE__) # rubocop:disable Style/ExpandPathArguments
+dir = File.expand_path('..', __FILE__)
+lib = File.expand_path('lib', dir)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'wtfalert/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'wtfalert'
