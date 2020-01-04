@@ -24,8 +24,8 @@ module Wtfalert
 
       dn = options.key?(:domian) ? options[:domain] : %x(hostname -d).chomp
       opts = {
-        :store => '/opt/wtfapp/var/lib',
-        :smtphost => 'localhost',
+        :store => '/opt/wtfapp/var',
+        :smtphost => 'localhost', # TODO: give alternate mail configurations before release
         :domain => dn,
         :to => "root@#{dn}",
         :from => "root@#{dn}",
@@ -123,8 +123,8 @@ module Wtfalert
 
     def do_action(action, args)
       case action
-      when 'dump'
-        pp @alerts
+      when %r{^(dump|show)$}
+        @alerts.show
       when 'raise'
         raise_action(args)
       when 'clear'
@@ -135,7 +135,16 @@ module Wtfalert
     end
 
     def alert_action(action, args = nil)
+      saved_mask = File.umask(0o0002)
       debug "alert_action called for #{action}"
+      alert_masked(action, args)
+      File.umask(saved_mask)
+    rescue StandardError => e
+      error e.message
+      File.umask(saved_mask) unless saved_mask.nil?
+    end
+
+    def alert_masked(action, args)
       locked = false
       lockname = @alerts.lockname
       Filelock lockname, :wait => 60, :timeout => 55 do |file|

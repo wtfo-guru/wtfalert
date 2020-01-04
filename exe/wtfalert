@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# vim:sta:et:sw=2:ts=2:syntax=ruby
+
+require 'bundler/setup'
+require 'wtfalert'
+
+###################
+# == DEV TIPS:
+#
+# For local testing run like:
+#
+#    ruby -Ilib exe/wtfalert
+#
+
+require 'wtfalert'
+
+Wtfalert.main File.basename($PROGRAM_NAME)

@@ -72,6 +72,21 @@ module Wtfalert
       @dirty = false
     end
 
+    def show
+      puts 'store: ' + @store.data_pathname
+      @data.each do |k, v|
+        next unless v.is_a?(Hash)
+
+        puts "#{k}:"
+        puts "  count: #{v[:count]}"
+        puts "  throttled: #{v[:throttled]}"
+        if v[:last].positive?
+          last = Time.at(v[:last])
+          puts '  last: ' + last.to_s
+        end
+      end
+    end
+
     private
 
     def bump_count(key)
