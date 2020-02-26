@@ -26,7 +26,7 @@ module Wtfalert
       )
     end
 
-    def usage(ec = 0)
+    def usage(exc = 0)
       puts <<-USG
       usage: #{@basenm} [-d] [-h] [-s caller] [-S] [-v] [-V]
         where:
@@ -37,7 +37,7 @@ module Wtfalert
           -v|--verbose       - add verbosity
           -V|--version       - show version and exit
       USG
-      exit each
+      exit exc
     end
 
     def create
@@ -82,6 +82,8 @@ module Wtfalert
       case action
       when 'show'
         show
+      else
+        usage
       end
     end
     # rubocop:enable Metrics/MethodLength
