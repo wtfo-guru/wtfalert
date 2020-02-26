@@ -26,12 +26,12 @@ RSpec.describe Wtfalert::Alerter do
   end
 
   it 'raises and sends test alert' do
-    alerter.raise(:key => 'rspec.test')
+    alerter.raise_alert(:key => 'rspec.test')
     expect(alerter.status).to eq('raised: 1 cleared: 0 sent: 1 throttled: 0 errors: 0')
   end
 
   it 'raises and throttles test alert' do
-    alerter.raise(:key => 'rspec.test')
+    alerter.raise_alert(:key => 'rspec.test')
     expect(alerter.status).to eq('raised: 1 cleared: 0 sent: 0 throttled: 1 errors: 0')
   end
 

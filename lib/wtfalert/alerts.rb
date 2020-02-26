@@ -26,8 +26,8 @@ module Wtfalert
       @store.lockname
     end
 
-    def raise(args, body = 'no message specified')
-      @logger.debug 'Alerts::raise called'
+    def lift(args, body = 'no message specified')
+      @logger.debug 'Alerts::lift called'
       bump_count(args[:key])
       @dirty = true
       @data[args[:key]][:last] = init_int @data[args[:key]][:last]

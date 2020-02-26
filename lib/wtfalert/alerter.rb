@@ -70,7 +70,7 @@ module Wtfalert
     #     filename => 'pathname',         # optional read file into message
     #  }
     #
-    def raise(args)
+    def raise_alert(args)
       alert_action('raise', args)
     end
 
@@ -109,7 +109,7 @@ module Wtfalert
 
       raise ArgumentError, 'Failed to raise alert. Missing key argument.' unless args.key?(:key)
 
-      message = @alerts.raise(args)
+      message = @alerts.lift(args)
       warn message
       if message =~ %r{^Alert throttled:}
         @throttled += 1
